@@ -1,8 +1,12 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Graphics.*;
+import java.awt.event.*;
+import java.applet.*;
+import javax.swing.JComponent;
 
-public class DrawDice extends JFrame {
+public class DrawDice extends JPanel {
     public static void createGUI() {
 
         JFrame frame = new JFrame("Game of Crabs");
@@ -23,10 +27,19 @@ public class DrawDice extends JFrame {
         //Add the ubiquitous "Hello World" label.
         /*JLabel label = new JLabel("Dice");
         frame.getContentPane().add(label);*/
-
+        //paintComponent(Graphics2D);
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        super.paintComponent(g2);  // fill with background color.
+        g2.setColor( Color.blue );
+        //g2.drawRect(0,0,,99);
+        //g2.drawRect(1,1,97,97);
+        g2.fillRect(100, 100, 200, 200);
     }
 
 }
