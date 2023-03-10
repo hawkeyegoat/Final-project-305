@@ -1,16 +1,24 @@
 package Model;
 
 import java.awt.geom.Rectangle2D;
+import java.beans.PropertyChangeSupport;
 import java.util.Random;
 public class Dice {
+    private PropertyChangeSupport changes = new PropertyChangeSupport(this);
     private int playerWins;
     private int houseWins;
     private int myPoint;
+    private boolean myGameActive;
     private final Random rand = new Random();
+    //private static Dice myInstance = new Dice(1,6);
 
     private int myFloor;
     private int myCeiling;
     private int myValue;
+    private int dice1 = rand.nextInt((myCeiling - myFloor) + 1) + myFloor;
+    private int dice2 = rand.nextInt((myCeiling - myFloor) + 1) + myFloor;
+   // private Dice dice1 = new Dice(1, 6);
+   // private Dice dice2 = new Dice(1,6);
     public Dice(final int theFloor, final int theCeiling) {
         myFloor = theFloor;
         myCeiling = theCeiling;
@@ -33,6 +41,12 @@ public class Dice {
    /* public void general(Dice input) {
         //if(inpu)
     }*/
+    public int getDice1() { //changed to int from Dice , refactoring class to Craps
+        return dice1;
+    }
+    public int getDice2() {
+        return dice2;
+    }
     public void setValue(final int theValue) {
         myValue = theValue;
     }
