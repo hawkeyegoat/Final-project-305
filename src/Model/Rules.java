@@ -1,7 +1,7 @@
 package Model;
 
 public class Rules {
-    private int playerWins;
+    /*private int playerWins;
     private int houseWins;
     private int myPoint;
     //Nulify constructor
@@ -23,6 +23,7 @@ public class Rules {
      * @param sum
      * @return
      */
+    /*
     public int checkWin(final int sum) {
         if (myPoint == 0) {
             if (sum == 7 || sum == 11) {
@@ -38,14 +39,14 @@ public class Rules {
             if (sum == myPoint) {
                 myPoint = 0;
                 //return 3;
-                checkWin(Dice.randomSum());
+                checkWin(Craps.randomSum());
             } else if (sum == 7) {
                 return 2;
             }
         }
         return 3;
     }
-    public void general (final Dice dice1, final Dice dice2) {
+    /*public void general (final Craps dice1, final Craps dice2) {
         if(checkWin(dice1.sum(dice2)) == 1) {
             incrementPlayerWins();
             //main method
@@ -58,6 +59,5 @@ public class Rules {
             //point = dice1.sum(dice2);
 
         }
-    }
-
+    }*/
 }
