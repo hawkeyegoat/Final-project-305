@@ -1,3 +1,6 @@
+/*
+ * TCSS 305 - Final Project: Craps
+ */
 package View;
 
 import Model.Craps;
@@ -16,49 +19,144 @@ import java.io.*;
 import static Model.Craps.getCrapsInstance;
 import static Model.Craps.myInstance;
 
+/**
+ * Has our view code to create our gui.
+ * @author Logan Atkinson
+ * @version 3/15/23
+ */
 
 public class DrawDice extends JPanel implements PropertyChangeListener {
+    /**
+     * The button to start the game.
+     */
     private JButton myStart;
-    private JButton myRoll;
-    private JLabel myDice1;
-    private JLabel myDice2;
+    /**
+     * JLabel to show the players point.
+     */
     private JLabel myPoint;
+    /**
+     * JButton to roll the dice.
+     */
+    private JButton myRoll;
+    /**
+     * JLabel to show Dice1.
+     */
+    private JLabel myDice1;
+    /**
+     * JLabel to show Dice2.
+     */
+    private JLabel myDice2;
+    //private JLabel myPoint;
+    /**
+     * JLabel to show the sum of Dice1 and Dice2.
+     */
     private JLabel myTotal;
+    /**
+     * JLabel to show the houses' wins.
+     */
     private JLabel myHouseWins;
+    /**
+     * JLabel to show the players' wins.
+     */
     private JLabel myPlayerWins;
+    /**
+     * JTextfield to get and show the players bank amount.
+     */
     private JTextField myBanksAmount;
+    /**
+     * JButton to submit players bank amount.
+     */
     private JButton myBankButton;
+    /**
+     * JTextField to get and show the bet amount.
+     */
     private JTextField myBetAmount;
+    /**
+     * JButton to increment the players bet by 1.
+     */
     private JButton myIncrement1;
+    /**
+     * JButton to increment the players bet by 5.
+     */
     private JButton myIncrement5;
+    /**
+     * JButton to increment the players bet by 10.
+     */
     private JButton myIncrement10;
+    /**
+     * JButton to increment the players bet by 50.
+     */
     private JButton myIncrement50;
+    /**
+     * JButton to increment the players bet by 100.
+     */
     private JButton myIncrement100;
+    /**
+     * JButton to increment the players bet by 500.
+     */
     private JButton myIncrement500;
+    /**
+     * JMenu to hold game options.
+     */
     private JMenu gameMenu;
+    /**
+     * JMenuItem to start the game.
+     */
     private JMenuItem Start;
+    /**
+     * JMenuItem to reset the game.
+     */
     private JMenuItem myReset;
+    /**
+     * JMenuItem to exit the game.
+     */
     private JMenuItem myExit;
+    /**
+     * JMenu to hold the help options.
+     */
     private JMenu helpMenu;
+    /**
+     * JMenuItem to show details about the program.
+     */
     private JMenuItem myAbout;
+    /**
+     * JMenuItem to show the game rules.
+     */
     private JMenuItem myRules;
+    /**
+     * JMenuBar to hold the game and help menus.
+     */
     private JMenuBar menuB;
+    /**
+     * JFrame to hold everything.
+     */
     private JFrame window;
+    /**
+     * Constant to store warning for betting too much.
+     */
+    private final static String debtWarning = "Please do not bet more than you can afford!";
+    /**
+     * Constant for new lines.
+     */
     private final static String NEWLINE = System.lineSeparator();
+    /**
+     * Constant to show the rules.
+     */
     private final static String RULE_SET = "For the game of Craps, you have two die. On each roll, your score " + NEWLINE +
-            "is the sum of your two die. If the score on the first roll is a 7 or 11 then you win." + NEWLINE + "However, if your " +
+            "is the sum of your two die. If the score on the first roll is a 7 or 11 then you win." + NEWLINE + "However, if your score " +
             "is 2, 3, or 12 then the house wins. If the score is neither of these, then you will have to roll until you " +  NEWLINE +
             "re-roll your original score to win. However, if you roll a 7 before rolling your original value, then the house wins.";
+    /**
+     * Constant to show everything about the program.
+     */
     private final static String ABOUT = "Author: Logan Atkinson" + NEWLINE + "App version: 1.1" + NEWLINE
-        + "Java Version: 19";
-    Clip sound;
+        + "Java Version: 19" + NEWLINE + "Play testers: Mom and Dad";
+    //Clip sound; Not being used, saving it to show my idea for the audio.
+
+    /**
+     * Constructor.
+     */
     public DrawDice() {
-        //JPanel panel = new JPanel();
-        //JFrame frame = new JFrame("Game of Craps");
-        //frame.setContentPane(this);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //JPanel panel = new JPanel();
-        //ImageIcon img = new ImageIcon("")
         window = new JFrame("The game of craps");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setContentPane(this);
@@ -95,39 +193,33 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         menuB.add(gameMenu);
         menuB.add(helpMenu);
         window.setJMenuBar(menuB);
-        //setMenuB(window);
 
         myStart = new JButton("Start Game");
-        //myStart.setBounds(0,0,100,50);
+        myStart.setMnemonic(KeyEvent.VK_SPACE);
         myRoll = new JButton("Roll Dice");
-        //myRoll.setBounds(800,0,100,50);
-        myRoll.setMnemonic('r'); //sets shortcut
-        //ImageIcon D = new ImageIcon("Icons//Dice1.png");
-       /* ImageIcon I = new ImageIcon("Icons//Dice1.png");
-        Image Im = I.getImage();
-        Image newIm = Im.getScaledInstance(80,80, Image.SCALE_SMOOTH);
-        ImageIcon newImageIcon = new ImageIcon(newIm);*/
+
+        myRoll.setMnemonic(KeyEvent.VK_SPACE); //sets shortcut
+
         myDice1 = new JLabel("Dice 1", resizeIcon("Icons//Dice1.png"), JLabel.LEFT); //used stack overflow to figure out how to resize an icon
-        //myDice1.setIcon(new ImageIcon("dice1.png"));
-        //myDice1.setBounds(0,500,100,50);
+
         myDice2 = new JLabel("Dice 2", resizeIcon("Icons//Dice1.png"), JLabel.LEFT);
-        //myDice2.setBounds(0,800,100,50);
+
         myTotal = new JLabel("Total");
         myPoint = new JLabel("Point");
         myHouseWins = new JLabel("House Wins: 0");
         myPlayerWins = new JLabel("Player Wins: 0");
-        //add all to frame
         add(myStart);
         add(myRoll);
         myRoll.setEnabled(false);
         add(myDice1);
         add(myDice2);
         add(myTotal);
+        add(myPoint);
         add(myHouseWins);
         add(myPlayerWins);
 
         JPanel myBank = new JPanel();
-        myBanksAmount = new JTextField("0");
+        myBanksAmount = new JTextField("Enter Bank here");
         myBanksAmount.setEditable(true);
         myBanksAmount.setColumns(10);
         myBankButton = new JButton("Set Bank");
@@ -144,7 +236,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         myIncrement50 = new JButton("+$50");
         myIncrement100 = new JButton("+$100");
         myIncrement500 = new JButton("+$500");
-        myBets.add(myBetAmount); //Make it so that if myBetAmount = 0 show JOption panel, do this in myRoll button listener
+        myBets.add(myBetAmount);
         myBets.add(myIncrement1);
         myBets.add(myIncrement5);
         myBets.add(myIncrement10);
@@ -152,14 +244,17 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         myBets.add(myIncrement100);
         myBets.add(myIncrement500);
         add(myBets);
-        //setLayout(theLayout);
         setVisible(true);
 
         addListeners();
 
             }
 
-            public void addListeners() {
+    /**
+     * Method to add all the listeners.
+     */
+
+    public void addListeners() {
                 myStart.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -172,10 +267,10 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                         else {
                             disableBetButtons();
                             getCrapsInstance().startGame();
-                            myDice1.setText("Dice 1: "); //+ getCrapsInstance().getDice1());
-                            myDice2.setText("Dice 2: "); //+ getCrapsInstance().getDice1());
+                            myDice1.setText("Dice 1: ");
+                            myDice2.setText("Dice 2: ");
                             myTotal.setText("total");
-                            myPoint.setText("Point");
+                            myPoint.setText("Point: ");
                             myRoll.setEnabled(true);
                             myStart.setEnabled(false);
                         }
@@ -186,19 +281,15 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                     public void actionPerformed(ActionEvent e) {
                         Model.Craps craps1 = getCrapsInstance();
                         if(craps1.getGameActive()) {
-                            //setRollSound("Icons//RollingDiceSound.mp3");
                             craps1.rollDice();
                             myDice1.setText("Dice 1: " + craps1.getDice1());
-                            //ImageIcon d1 = new ImageIcon("Dice"+craps1.getDice1() + "png");
-                            myDice1.setIcon(resizeIcon("Icons//Dice" + craps1.getDice1() +".png")); //ITS ACTUALLY WORKING!!!
+                            myDice1.setIcon(resizeIcon("Icons//Dice" + craps1.getDice1() +".png"));
                             myDice2.setText("Dice 2: " + craps1.getDice2());
                             myDice2.setIcon(resizeIcon("Icons//Dice" + craps1.getDice2() + ".png"));
                             myTotal.setText("Total: " + craps1.sum());
-                            if (craps1.getMyPoint() != 0) {
-                                myPoint.setText("point: " + craps1.getMyPoint());
-                            }
-                            else {
-                                myPoint.setText("point");
+
+                            if(myPoint.getText() == "Point: ") {
+                                myPoint.setText("Point: " + craps1.getMyPoint());
                             }
                             if (!craps1.getGameActive()) {
                                 JOptionPane.showMessageDialog(null,"Winner: " + craps1.getWinner());
@@ -211,13 +302,18 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                                     myBetAmount.setText("0");
                                 }
                                 else {
-                                    //craps1.setMyBankAmount(craps1.getMyBankAmount() - craps1.getMyBetAmount());
-                                    //myBanksAmount.setText(String.valueOf(craps1.getMyBankAmount()));
                                     craps1.setMyBetAmount(0);
                                     myBetAmount.setText("0");
                                 }
                             }
                         }
+                    }
+                });
+                //Empties textbox when clicked
+                myBanksAmount.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        myBanksAmount.setText("");
                     }
                 });
                 myBankButton.addActionListener(new ActionListener() {
@@ -267,7 +363,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                         int money1 = Integer.parseInt(money);
                         money1 += 1;
                         if (myInstance.getMyBankAmount() - 1 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
 
                         }
                         else {
@@ -285,7 +381,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                         int money1 = Integer.parseInt(money);
                         money1 += 5;
                         if (myInstance.getMyBankAmount() - 5 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
 
                         }
                         else {
@@ -306,7 +402,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
 
                         //myInstance.decrementMyBankAmount(10);
                         if (myInstance.getMyBankAmount() - 10 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
 
                         }
                         else {
@@ -328,7 +424,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
 
                         myInstance.decrementMyBankAmount(50);
                         if (myInstance.getMyBankAmount() - 50 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
 
                         }
                         else {
@@ -348,7 +444,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
 
                         myInstance.decrementMyBankAmount(100);
                         if (myInstance.getMyBankAmount() - 100 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
 
                         }
                         else {
@@ -370,7 +466,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
 
                         //myInstance.decrementMyBankAmount(500);
                         if (myInstance.getMyBankAmount() - 500 < 0) {
-                            JOptionPane.showMessageDialog(null, "Please do not bet more than you can afford!");
+                            JOptionPane.showMessageDialog(null, debtWarning);
                             //myInstance.decrementMyBankAmount(-500);
 
                         }
@@ -415,7 +511,8 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                 myExit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you would like to quit the game?", "Exit", JOptionPane.YES_NO_OPTION);
+                        int answer = JOptionPane.showConfirmDialog(null, "Are you sure you would like to quit the game?",
+                                "Exit", JOptionPane.YES_NO_OPTION);
                         if (answer == JOptionPane.YES_OPTION) {
                             //exit
                             window.dispose();
@@ -438,6 +535,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                     }
                 });
             }
+            //could not get this to work
             public void setRollSound(String file) {
                 Clip sound;
                 try {
@@ -452,10 +550,16 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                 }
                 //sound.start();
             }
-            public void playRollSound() {
+            /*public void playRollSound() {
                 sound.setFramePosition(0);
                 sound.start();
-            }
+            }*/
+
+    /**
+     * Method to get receive property changes.
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName() == "active") {
@@ -463,10 +567,17 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                 myRoll.setEnabled(false);
                 myStart.setEnabled(true);
                 enableBetButtons();
-                //JOptionPane.showMessageDialog(null, "Game not active!");
             }
         }
     }
+
+    /**
+     * Gets and resizes the given icon.
+     * Warning: I did write the original get icon method, however spent a solid hour trying to
+     * resize the image to no avail. So here is the source for the fix, https://stackoverflow.com/questions/6714045/how-to-resize-jlabel-imageicon
+     * @param fileName The image to resize
+     * @return The image icon to use
+     */
     public ImageIcon resizeIcon(String fileName) {
         ImageIcon I = new ImageIcon(fileName);
         Image Im = I.getImage();
@@ -474,6 +585,10 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         ImageIcon newImageIcon = new ImageIcon(newIm);
         return newImageIcon;
     }
+
+    /**
+     * Disables the buttons to edit the players bet.
+     */
     public void disableBetButtons() {
         myIncrement1.setEnabled(false);
         myIncrement5.setEnabled(false);
@@ -483,6 +598,10 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         myIncrement500.setEnabled(false);
         myBetAmount.setEnabled(false);
     }
+
+    /**
+     * Enables the buttons to edit the players bet.
+     */
     public void enableBetButtons() {
         myIncrement1.setEnabled(true);
         myIncrement5.setEnabled(true);
@@ -492,88 +611,4 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         myIncrement500.setEnabled(true);
         myBetAmount.setEnabled(true);
     }
-    /*public void setMenuB (JFrame frame) {
-        menuB = new JMenuBar();
-        gameMenu = new JMenu("Game");
-        Start = new JMenuItem("Start");
-        myReset = new JMenuItem("Reset");
-        myExit = new JMenuItem("Exit");
-
-        gameMenu.add(Start);
-        gameMenu.add(myReset);
-        gameMenu.add(myExit);
-        helpMenu = new JMenu("Help");
-        myAbout = new JMenuItem("About");
-        myRules = new JMenuItem("Rules");
-        helpMenu.add(myAbout);
-        helpMenu.add(myRules);
-
-        menuB.add(gameMenu);
-        menuB.add(helpMenu);
-
-        frame.setJMenuBar(menuB);
-    }*/
-
-    /*public static void createGUI() {
-
-        final DrawDice mainPanel = new DrawDice();
-
-        final JFrame window = new JFrame("Game of Crabs");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setContentPane(mainPanel);
-        window.pack();
-        window.setVisible(true);
-        DrawDice panel = new DrawDice();
-        panel.setBounds(0,0,500,500);
-
-        JFrame frame = new JFrame("Game of Crabs");
-        frame.setContentPane(panel);
-        frame.setBounds(0, 0, 500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
-        Button roll = new Button("Roll");
-        roll.setBounds(50, 200, 100, 50);
-        frame.add(roll);
-
-
-        JLabel point = new JLabel("Point: ");
-        point.setBounds(50, 300, 100, 50);
-        frame.add(point);
-
-        JLabel pointAmount = new JLabel("10000");
-        pointAmount.setBounds(50, 300, 100, 50);
-        //pointAmount.setEditable(false);
-        pointAmount.setBounds(500, 300, 100, 50);
-        frame.add(pointAmount);
-
-        //paintComponent(Graphics2D);
-        //Display the window.
-
-
-        panel.setLayout(new GridLayout(3,2));
-        //frame.pack();
-        frame.setVisible(true);
-    }*/
-   /* @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        super.paintComponent(g2);  // fill with background color.
-        g2.setColor( Color.blue );
-        //g2.drawRect(0,0,,99);
-        //g2.drawRect(1,1,97,97);
-        g2.fillRect(100, 100, 200, 200);
-    }*/
-
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
-    //@Override
-    //public void propertyChange(PropertyChangeEvent evt) {
-
-    //}
 }
