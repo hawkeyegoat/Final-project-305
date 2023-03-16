@@ -29,108 +29,108 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
     /**
      * The button to start the game.
      */
-    private JButton myStart;
+    private final JButton myStart;
     /**
      * JLabel to show the players point.
      */
-    private JLabel myPoint;
+    private final JLabel myPoint;
     /**
      * JButton to roll the dice.
      */
-    private JButton myRoll;
+    private final JButton myRoll;
     /**
      * JLabel to show Dice1.
      */
-    private JLabel myDice1;
+    private final JLabel myDice1;
     /**
      * JLabel to show Dice2.
      */
-    private JLabel myDice2;
+    private final JLabel myDice2;
     //private JLabel myPoint;
     /**
      * JLabel to show the sum of Dice1 and Dice2.
      */
-    private JLabel myTotal;
+    private final JLabel myTotal;
     /**
      * JLabel to show the houses' wins.
      */
-    private JLabel myHouseWins;
+    private final JLabel myHouseWins;
     /**
      * JLabel to show the players' wins.
      */
-    private JLabel myPlayerWins;
+    private final JLabel myPlayerWins;
     /**
      * JTextfield to get and show the players bank amount.
      */
-    private JTextField myBanksAmount;
+    private final JTextField myBanksAmount;
     /**
      * JButton to submit players bank amount.
      */
-    private JButton myBankButton;
+    private final JButton myBankButton;
     /**
      * JTextField to get and show the bet amount.
      */
-    private JTextField myBetAmount;
+    private final JTextField myBetAmount;
     /**
      * JButton to increment the players bet by 1.
      */
-    private JButton myIncrement1;
+    private final JButton myIncrement1;
     /**
      * JButton to increment the players bet by 5.
      */
-    private JButton myIncrement5;
+    private final JButton myIncrement5;
     /**
      * JButton to increment the players bet by 10.
      */
-    private JButton myIncrement10;
+    private final JButton myIncrement10;
     /**
      * JButton to increment the players bet by 50.
      */
-    private JButton myIncrement50;
+    private final JButton myIncrement50;
     /**
      * JButton to increment the players bet by 100.
      */
-    private JButton myIncrement100;
+    private final JButton myIncrement100;
     /**
      * JButton to increment the players bet by 500.
      */
-    private JButton myIncrement500;
+    private final JButton myIncrement500;
     /**
      * JMenu to hold game options.
      */
-    private JMenu gameMenu;
+    private final JMenu gameMenu;
     /**
      * JMenuItem to start the game.
      */
-    private JMenuItem Start;
+    private final JMenuItem Start;
     /**
      * JMenuItem to reset the game.
      */
-    private JMenuItem myReset;
+    private final JMenuItem myReset;
     /**
      * JMenuItem to exit the game.
      */
-    private JMenuItem myExit;
+    private final JMenuItem myExit;
     /**
      * JMenu to hold the help options.
      */
-    private JMenu helpMenu;
+    private final JMenu helpMenu;
     /**
      * JMenuItem to show details about the program.
      */
-    private JMenuItem myAbout;
+    private final JMenuItem myAbout;
     /**
      * JMenuItem to show the game rules.
      */
-    private JMenuItem myRules;
+    private final JMenuItem myRules;
     /**
      * JMenuBar to hold the game and help menus.
      */
-    private JMenuBar menuB;
+    private final JMenuBar menuB;
     /**
      * JFrame to hold everything.
      */
-    private JFrame window;
+    private final JFrame window;
     /**
      * Constant to store warning for betting too much.
      */
@@ -288,14 +288,14 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             myDice2.setIcon(resizeIcon("Icons//Dice" + craps1.getDice2() + ".png"));
                             myTotal.setText("Total: " + craps1.sum());
 
-                            if(myPoint.getText() == "Point: ") {
+                            if(myPoint.getText().equals("Point: ")) {
                                 myPoint.setText("Point: " + craps1.getMyPoint());
                             }
                             if (!craps1.getGameActive()) {
                                 JOptionPane.showMessageDialog(null,"Winner: " + craps1.getWinner());
                                 myPlayerWins.setText("Player Wins: " + craps1.getPlayerWins());
                                 myHouseWins.setText("House Wins: " + craps1.getHouseWins());
-                                if(craps1.getWinner() == "Player") {
+                                if(craps1.getWinner().equals("Player")) {
                                     craps1.setMyBankAmount(2 * craps1.getMyBetAmount() + craps1.getMyBankAmount());
                                     myBanksAmount.setText(String.valueOf(craps1.getMyBankAmount()));
                                     craps1.setMyBetAmount(0);
@@ -517,9 +517,6 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             //exit
                             window.dispose();
                         }
-                            else {
-                                //do nothing
-                            }
                     }
                 });
                 myRules.addActionListener(new ActionListener() {
@@ -562,8 +559,8 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName() == "active") {
-            if ((boolean)evt.getNewValue() == false) {
+        if (evt.getPropertyName().equals("active")) {
+            if (!(boolean)evt.getNewValue()) {
                 myRoll.setEnabled(false);
                 myStart.setEnabled(true);
                 enableBetButtons();
