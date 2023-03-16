@@ -65,20 +65,30 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         window.pack();
         window.setVisible(true);
 
-        GridLayout theLayout = new GridLayout(4, 3);
+        GridLayout theLayout = new GridLayout(2, 4);
         setLayout(theLayout);
         menuB = new JMenuBar();
         gameMenu = new JMenu("Game");
         Start = new JMenuItem("Start");
+        Start.setMnemonic(KeyEvent.VK_S);
+        Start.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,  ActionEvent.CTRL_MASK));
         myReset = new JMenuItem("Reset");
+        myReset.setMnemonic(KeyEvent.VK_D);
+        myReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,  ActionEvent.CTRL_MASK));
         myExit = new JMenuItem("Exit");
+        myExit.setMnemonic(KeyEvent.VK_E);
+        myExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,  ActionEvent.CTRL_MASK));
         gameMenu.add(Start);
         gameMenu.add(myReset);
         gameMenu.add(myExit);
 
         helpMenu = new JMenu("Help");
         myAbout = new JMenuItem("About");
+        myAbout.setMnemonic(KeyEvent.VK_A);
+        myAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,  ActionEvent.CTRL_MASK));
         myRules = new JMenuItem("Rules");
+        myRules.setMnemonic(KeyEvent.VK_R);
+        myRules.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,  ActionEvent.CTRL_MASK));
         helpMenu.add(myAbout);
         helpMenu.add(myRules);
 
@@ -160,6 +170,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             JOptionPane.showMessageDialog(null, "Your bank account cannot be negative!");
                         }
                         else {
+                            disableBetButtons();
                             getCrapsInstance().startGame();
                             myDice1.setText("Dice 1: "); //+ getCrapsInstance().getDice1());
                             myDice2.setText("Dice 2: "); //+ getCrapsInstance().getDice1());
@@ -224,6 +235,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             else {
                                 Craps.myInstance.setMyBankAmount(moneyTemp);
                                 myBanksAmount.setEditable(false);
+                                myBankButton.setEnabled(false);
                             }
                             //System.out.println(money);
                         } catch (final NumberFormatException nfe) {
@@ -383,6 +395,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             JOptionPane.showMessageDialog(null, "Your bank account cannot be negative!");
                         }
                         else {
+                            disableBetButtons();
                             getCrapsInstance().startGame();
                             myDice1.setText("Dice 1: "); //+ getCrapsInstance().getDice1());
                             myDice2.setText("Dice 2: "); //+ getCrapsInstance().getDice1());
@@ -449,6 +462,7 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
             if ((boolean)evt.getNewValue() == false) {
                 myRoll.setEnabled(false);
                 myStart.setEnabled(true);
+                enableBetButtons();
                 //JOptionPane.showMessageDialog(null, "Game not active!");
             }
         }
@@ -459,6 +473,24 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
         Image newIm = Im.getScaledInstance(80,80, Image.SCALE_SMOOTH);
         ImageIcon newImageIcon = new ImageIcon(newIm);
         return newImageIcon;
+    }
+    public void disableBetButtons() {
+        myIncrement1.setEnabled(false);
+        myIncrement5.setEnabled(false);
+        myIncrement10.setEnabled(false);
+        myIncrement50.setEnabled(false);
+        myIncrement100.setEnabled(false);
+        myIncrement500.setEnabled(false);
+        myBetAmount.setEnabled(false);
+    }
+    public void enableBetButtons() {
+        myIncrement1.setEnabled(true);
+        myIncrement5.setEnabled(true);
+        myIncrement10.setEnabled(true);
+        myIncrement50.setEnabled(true);
+        myIncrement100.setEnabled(true);
+        myIncrement500.setEnabled(true);
+        myBetAmount.setEnabled(true);
     }
     /*public void setMenuB (JFrame frame) {
         menuB = new JMenuBar();
