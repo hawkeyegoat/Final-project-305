@@ -45,11 +45,12 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
     private JMenuBar menuB;
     private JFrame window;
     private final static String NEWLINE = System.lineSeparator();
-    private final static String RULE_SET = "For the game of Craps, you have two die. On each roll, your score " +
-            "is the sum of your two die. If the score on the first roll is a 7 or 11 then you win. However, if your " +
-            "is 2, 3, or 12 then the house wins. If the score is neither of these, then you will have to roll until you " + "" +
-            "re-roll your original score to win. However, if you roll a 7 before rolling your orignal value, then the house wins.";
-    private final static String ABOUT = "Author: Logan Atkinson" + NEWLINE + "Java Version: "
+    private final static String RULE_SET = "For the game of Craps, you have two die. On each roll, your score " + NEWLINE +
+            "is the sum of your two die. If the score on the first roll is a 7 or 11 then you win." + NEWLINE + "However, if your " +
+            "is 2, 3, or 12 then the house wins. If the score is neither of these, then you will have to roll until you " +  NEWLINE +
+            "re-roll your original score to win. However, if you roll a 7 before rolling your original value, then the house wins.";
+    private final static String ABOUT = "Author: Logan Atkinson" + NEWLINE + "App version: 1.1" + NEWLINE
+        + "Java Version: 19";
     Clip sound;
     public DrawDice() {
         //JPanel panel = new JPanel();
@@ -409,6 +410,18 @@ public class DrawDice extends JPanel implements PropertyChangeListener {
                             else {
                                 //do nothing
                             }
+                    }
+                });
+                myRules.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, RULE_SET);
+                    }
+                });
+                myAbout.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JOptionPane.showMessageDialog(null, ABOUT);
                     }
                 });
             }
