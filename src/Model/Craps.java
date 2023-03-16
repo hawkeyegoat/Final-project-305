@@ -19,7 +19,10 @@ public class Craps {
     private int myValue;
     private int myDice1; //= rand.nextInt((myCeiling - myFloor) + 1) + myFloor;
     private int myDice2; //= rand.nextInt((myCeiling - myFloor) + 1) + myFloor;
+    private int myBankAmount;
+    private int myBetAmount;
     public static Craps myInstance = new Craps();
+
    // private Dice dice1 = new Dice(1, 6);
    // private Dice dice2 = new Dice(1,6);
     public Craps() {
@@ -27,6 +30,15 @@ public class Craps {
         //Random rand = new Random();
 
         //myValue = rand.nextInt((myCeiling - myFloor) + 1) + myFloor;
+    }
+    public void reset() {
+        setMyBetAmount(0);
+        setMyBankAmount(0);
+        myHouseWins = 0;
+        myPlayerWins = 0;
+        myDice1 = 0;
+        myDice2 = 0;
+        startGame();
     }
     public static Craps getCrapsInstance() {
         return myInstance;
@@ -63,6 +75,12 @@ public class Craps {
     public int getDice2() {
         return myDice2;
     }
+    public int getMyBankAmount() {
+        return myBankAmount;
+    }
+    public int getMyBetAmount() {
+        return myBetAmount;
+    }
     public void setValue(final int theValue) {
         myValue = theValue;
     }
@@ -71,6 +89,20 @@ public class Craps {
     }
     public void setMySum(final int theSum) {
     mySum = theSum;
+    }
+    public void incrementMyBet(final int theIncrementAmount) {
+        myBetAmount += theIncrementAmount;
+    }
+    public void decrementMyBankAmount(final int theIncrementAmount) {
+        myBankAmount = myBankAmount - theIncrementAmount;
+    }
+    public void setMyBetAmount(final int theAmount) {
+        myBetAmount = theAmount;
+        //setMyBankAmount(myBankAmount - myBetAmount);
+    }
+    public void setMyBankAmount(final int theAmount) {
+        myBankAmount = theAmount;
+        System.out.println(theAmount);
     }
 
     public void setGameActive(boolean value) {

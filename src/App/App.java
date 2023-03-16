@@ -15,11 +15,11 @@ public class App {
                 final DrawDice mainPanel =
                         new DrawDice();
                 Craps.getCrapsInstance().addPropertyChangeListener(mainPanel);
-                final JFrame window = new JFrame("The game of craps");
+                /*final JFrame window = new JFrame("The game of craps");
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 window.setContentPane(mainPanel);
                 window.pack();
-                window.setVisible(true);
+                window.setVisible(true);*/
             }
         });
        // Dice dice1 = new Dice(1, 6);
